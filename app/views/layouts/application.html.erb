@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>CurrencyTracker</title>
+  <%= stylesheet_link_tag :all %>
+  <%= javascript_include_tag 'extensions', 'jquery-1.5.2.min', 'view_controller', 'simple_pie_chart', 'main' %>
+  <%= csrf_meta_tag %>
+</head>
+<body>
+
+<header>
+  <h1>CurrencyTracker</h1>
+  <nav>
+    <ul>
+      <li><%= link_to "Currencies", currencies_path %></li>
+      <li><%= link_to "Countries", countries_path %></li>
+    </ul>
+  </nav>
+</header>
+
+<div id="user_nav">
+  <% if user_signed_in? %>
+    Signed in as <%= current_user.email %>. Not you?
+    <%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to "Sign up", new_user_registration_path %> or <%= link_to "sign in", new_user_session_path %>
+  <% end %>
+</div>
+
+<%= yield %>
+
+<footer>
+  CurrencyTracker &copy; Copyright 2011 by Smart Enterprises.
+</footer>
+</body>
+</html>

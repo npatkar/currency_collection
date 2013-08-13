@@ -1,0 +1,22 @@
+<%= javascript_tag "const AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+<section>
+
+  <table id ="country_curr_table">
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Status</th>
+      <th></th>
+      <th><input type="checkbox" id="selectall"/></th>	
+    </tr>
+  <% id_count = 0 %>
+  <% @visits.each do |visit| %>
+
+    <tr class="type_search">
+      <td><%= visit.user_id %></td>
+      <td><%= visit.country.name %></td>
+    </tr>
+  <% end %>
+  </table>
+
+</section>

@@ -1,0 +1,43 @@
+<%= javascript_tag "const AUTH_TOKEN = #{form_authenticity_token.inspect};" if protect_against_forgery? %>
+<section>
+  <input type="hidden" id = "countries_curr_count" value="<%= @currencies.count %>" >
+  <div id="collected_currencies_chart" class="simple_pie_chart" width='300px' height='100px'>
+    <table>
+      <tr>
+        <th>Collected</th>
+        <td><%= current_user.countries.count %></td>
+      </tr><tr>
+        <th>Not Collected</th>
+        <td><%= @currencies.count - @collected_currencies %></td>
+      </tr>
+    </table>
+  </div>
+
+  <br />
+  <div style="float:left;"><strong>Currencies</strong>&nbsp;&nbsp;<input type="text" id="search" placeholder="Type to search"></div>
+
+  <table id ="country_curr_table">
+    <tr>
+      <th>Name</th>
+      <th>Code</th>
+      <th>Status</th>
+      <th>Show</th>
+      <th>Update<input type="checkbox" id="selectall"/></th>	
+    </tr>
+  <% id_count = 0 %>
+  <% @currencies.each do |currency| %>
+    <% id_count = id_count+1 %>    
+    <tr class="type_search">
+      <td><%= currency.name %></td>
+      <td><%= currency.code %></td>
+      <td><%= current_user.countries.include?(currency.country) ? 'Collected' : 'Not Collected' %></td>
+      <td><%= link_to 'Show', currency %></td>
+      <td><input type="checkbox"  id = "<%= id_count %>"class="case" value="<%= currency.country_id %>" <%= current_user.countries.include?(currency.country) ? "checked" : "" %> /> </td>	
+    </tr>
+  <% end %>
+  </table>
+<div>
+<input type="button" value ="Update Visits" onclick="updateVisits()">
+</div>
+
+</section>

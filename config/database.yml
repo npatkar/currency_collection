@@ -1,0 +1,38 @@
+# SQLite version 3.x
+#   gem install sqlite3
+
+
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: currency_collector_dev
+  username: root
+  password: root
+  host: localhost
+  port: 3306
+
+
+test: &test
+  adapter: mysql2
+  encoding: utf8
+  database: currency_collector_test
+  username: root
+  password: root
+  host: localhost
+  port: 3306
+
+
+production:
+  adapter: mysql2
+  encoding: utf8
+  database: currency_collector_prod
+  username: root
+  password: root
+  host: localhost
+  port: 3306
+
+
+
+
+cucumber:
+  <<: *test
